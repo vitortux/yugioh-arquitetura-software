@@ -1,27 +1,35 @@
-package br.com.senac.domain.game;
+package br.com.senac.domain.game.state;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import br.com.senac.domain.card.AttackStrategy;
 import br.com.senac.domain.card.Card;
+import br.com.senac.domain.card.CardStrategy;
 import br.com.senac.domain.card.Factory;
+import br.com.senac.domain.game.Game;
+import br.com.senac.domain.game.GameException;
 import br.com.senac.domain.player.Player;
 
 public class SelectionState implements IGameState {
+    private final Game game;
     private List<Factory> options = Arrays.asList(Factory.values());
 
+    public SelectionState(Game game) {
+        this.game = game;
+    }
+
     @Override
-    public void execute(Game game) {
+    public void execute() {
         Player[] players = game.getPlayers();
 
         for (int i = 0; i < players.length; i++) {
             System.out.print("\u001B[2J\u001B[H");
             System.out.flush();
 
-            System.out.printf("Seleção de cartas: jogador %d, escolha suas cartas!%n%n", i + 1);
+            System.out.printf("Seleção de cartas: jogador %s, escolha suas cartas!%n%n", players[i].getName());
 
             this.displayAllCards();
 
@@ -30,8 +38,8 @@ public class SelectionState implements IGameState {
 
             while (loop) {
                 System.out.println("\nDigite (entre virgulas) suas cartas:");
-                System.out.println("\t-> Ex: 1, 3, 4, 7, 8, 10\n");
-                System.out.print("> ");
+                System.out.println("\t-> Ex: 1, 3, 4, 7, 8, 10");
+                System.out.print("\n> ");
 
                 String input = game.getScanner().nextLine();
 
@@ -43,8 +51,10 @@ public class SelectionState implements IGameState {
                 }
             }
 
-            players[i] = new Player(selected);
+            players[i].setDeck(selected);
         }
+
+        game.setState(new InGameState(game));
     }
 
     private void displayAllCards() {
@@ -80,6 +90,8 @@ public class SelectionState implements IGameState {
             throw new GameException("Você não pode adicionar cartas repetidas!");
         }
 
-        return deck.stream().map(index -> options.get(index).create(new AttackStrategy())).toList();
+        return new ArrayList<>(deck.stream()
+                .map(index -> options.get(index).create(CardStrategy.ATAQUE))
+                .toList());
     }
 }

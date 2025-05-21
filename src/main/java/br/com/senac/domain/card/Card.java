@@ -7,9 +7,9 @@ public class Card {
     private final String name;
     private final int atk;
     private final int def;
-    private ICardStrategy state;
+    private CardStrategy state;
 
-    private Card(String name, int atk, int def, ICardStrategy state) {
+    private Card(String name, int atk, int def, CardStrategy state) {
         this.name = name;
         this.atk = atk;
         this.def = def;
@@ -20,7 +20,7 @@ public class Card {
         private String name;
         private int atk;
         private int def;
-        private ICardStrategy state;
+        private CardStrategy state;
 
         public CartaBuilder setName(String name) {
             this.name = name;
@@ -37,7 +37,7 @@ public class Card {
             return this;
         }
 
-        public CartaBuilder setState(ICardStrategy state) {
+        public CartaBuilder setState(CardStrategy state) {
             this.state = state;
             return this;
         }

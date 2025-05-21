@@ -25,7 +25,7 @@ public enum Factory {
         this.def = def;
     }
 
-    public Card create(ICardStrategy state) {
+    public Card create(CardStrategy state) {
         return new Card.CartaBuilder()
                 .setName(this.name)
                 .setAtk(this.atk)

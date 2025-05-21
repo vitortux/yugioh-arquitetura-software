@@ -3,17 +3,16 @@ package br.com.senac.domain.player;
 import java.util.List;
 
 import br.com.senac.domain.card.Card;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class Player {
+    private String name;
     private List<Card> deck;
 
-    public Player(List<Card> deck) {
-        this.deck = deck;
-    }
-
-    public Card select(int index) {
-        return deck.get(index);
+    public Player(String name) {
+        this.name = name;
     }
 }

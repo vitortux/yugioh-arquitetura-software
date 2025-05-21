@@ -2,6 +2,8 @@ package br.com.senac.domain.game;
 
 import java.util.Scanner;
 
+import br.com.senac.domain.game.state.IGameState;
+import br.com.senac.domain.game.state.NameSelectionState;
 import br.com.senac.domain.player.Player;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +21,7 @@ public class Game {
         this.players = new Player[2];
         this.running = true;
         this.scanner = new Scanner(System.in);
-        this.state = new SelectionState();
+        this.state = new NameSelectionState(this);
     }
 
     public static Game getInstance() {
@@ -31,8 +33,7 @@ public class Game {
 
     public void run() {
         while (running) {
-            this.state.execute(instance);
-            this.running = false;
+            this.state.execute();
         }
     }
 }
