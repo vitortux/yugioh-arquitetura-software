@@ -1,10 +1,10 @@
 package br.com.senac;
 
-import br.com.senac.domain.game.Game;
+import br.com.senac.domain.jogo.Jogo;
 
 public class Main {
     public static void main(String[] args) {
-        Game game = Game.getInstance();
+        Jogo game = Jogo.getInstance();
         game.run();
     }
 }

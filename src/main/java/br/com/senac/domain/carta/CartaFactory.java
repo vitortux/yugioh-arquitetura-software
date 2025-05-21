@@ -1,9 +1,9 @@
-package br.com.senac.domain.card;
+package br.com.senac.domain.carta;
 
 import lombok.Getter;
 
 @Getter
-public enum Factory {
+public enum CartaFactory {
     MOLTRES("Moltres", 90, 80),
     ARTICUNO("Articuno", 85, 95),
     ZAPDOS("Zapdos", 88, 85),
@@ -19,14 +19,14 @@ public enum Factory {
     private final int atk;
     private final int def;
 
-    Factory(String name, int atk, int def) {
+    CartaFactory(String name, int atk, int def) {
         this.name = name;
         this.atk = atk;
         this.def = def;
     }
 
-    public Card create(CardStrategy state) {
-        return new Card.CartaBuilder()
+    public Carta create(CartaStrategy state) {
+        return new Carta.CartaBuilder()
                 .setName(this.name)
                 .setAtk(this.atk)
                 .setDef(this.def)

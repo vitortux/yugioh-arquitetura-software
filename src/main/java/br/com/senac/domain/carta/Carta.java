@@ -1,15 +1,15 @@
-package br.com.senac.domain.card;
+package br.com.senac.domain.carta;
 
 import lombok.Getter;
 
 @Getter
-public class Card {
+public class Carta {
     private final String name;
     private final int atk;
     private final int def;
-    private CardStrategy state;
+    private CartaStrategy state;
 
-    private Card(String name, int atk, int def, CardStrategy state) {
+    private Carta(String name, int atk, int def, CartaStrategy state) {
         this.name = name;
         this.atk = atk;
         this.def = def;
@@ -20,7 +20,7 @@ public class Card {
         private String name;
         private int atk;
         private int def;
-        private CardStrategy state;
+        private CartaStrategy state;
 
         public CartaBuilder setName(String name) {
             this.name = name;
@@ -37,13 +37,13 @@ public class Card {
             return this;
         }
 
-        public CartaBuilder setState(CardStrategy state) {
+        public CartaBuilder setState(CartaStrategy state) {
             this.state = state;
             return this;
         }
 
-        public Card build() {
-            return new Card(name, atk, def, state);
+        public Carta build() {
+            return new Carta(name, atk, def, state);
         }
     }
 
